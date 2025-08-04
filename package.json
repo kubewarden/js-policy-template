@@ -1,0 +1,41 @@
+{
+  "name": "kubewarden-js-policy-template",
+  "version": "0.1.0",
+  "description": "A JavaScript Kubewarden policy template",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "make build",
+    "test": "jest",
+    "e2e": "bats e2e.bats",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "kubewarden-policy-sdk": "file:../policy-sdk-js/js/kubewarden-policy-sdk-0.1.0-alpha.0.tgz"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.1",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.x.x",
+    "webpack-cli": "^5.x.x"
+  },
+  "keywords": [
+    "kubewarden",
+    "policy",
+    "kubernetes",
+    "wasm",
+    "javascript"
+  ],
+  "author": "Kubewarden",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kubewarden/js-policy-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kubewarden/js-policy-template/issues"
+  }
+}
