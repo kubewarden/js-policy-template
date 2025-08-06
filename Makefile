@@ -4,12 +4,11 @@ KUBEWARDEN_PLUGIN := javy-plugin-kubewarden.wasm
 
 all: build-policy annotated-policy.wasm
 
-install:
+install: dist/bundled.js
 	npm install
 
 dist/bundled.js: src/index.ts package.json webpack.config.cjs
 	@mkdir -p dist
-	npm install
 	npx webpack --config webpack.config.cjs
 
 policy.wasm: dist/bundled.js $(KUBEWARDEN_PLUGIN)
