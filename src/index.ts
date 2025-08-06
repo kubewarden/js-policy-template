@@ -1,56 +1,80 @@
 import { Validation, writeOutput } from 'kubewarden-policy-sdk';
+import { PolicySettings, KubernetesResource, PodSpec, ValidationRequest } from './types';
 
 declare function policyAction(): string;
 
 /**
- * Interface representing policy settings structure.
- */
-interface PolicySettings {
-  // List of pod names that are denied by the policy.
-  denied_names?: string[];
-}
-
-/**
- * Extracts the pod name from the validation request.
+ * Safely parses and extracts the Kubernetes resource from the validation request.
  *
- * @param {any} validationRequest - The validation request object.
- * @returns {string | undefined} The pod name if available, otherwise undefined.
+ * @param {ValidationRequest} validationRequest - The validation request object.
+ * @returns {KubernetesResource | undefined} The parsed Kubernetes resource if available.
  */
-function getPodName(validationRequest: any): string | undefined {
+function getKubernetesResource(validationRequest: ValidationRequest): KubernetesResource | undefined {
   try {
     let requestObject = validationRequest.request?.object;
 
     if (typeof requestObject === 'string') {
-      requestObject = JSON.parse(requestObject);
+      requestObject = JSON.parse(requestObject) as KubernetesResource;
     }
 
-    return requestObject?.metadata?.name;
+    return requestObject as KubernetesResource;
   } catch (error) {
-    console.error('Error parsing request object:', error);
+    console.error('Error parsing Kubernetes resource:', error);
     return undefined;
   }
 }
 
 /**
+ * Extracts the hostname from a Pod resource.
+ *
+ * @param {KubernetesResource} resource - The Kubernetes resource.
+ * @returns {string | undefined} The hostname if set, otherwise undefined.
+ */
+function getPodHostname(resource: KubernetesResource): string | undefined {
+  // Only process Pod resources
+  if (resource.kind !== 'Pod') {
+    return undefined;
+  }
+
+  const podSpec = resource.spec as PodSpec;
+  return podSpec?.hostname;
+}
+
+/**
  * Validates the incoming request against policy settings.
- * Accepts or rejects the request based on denied pod names.
+ * Accepts or rejects the request based on denied hostnames.
  */
 function validate(): void {
   try {
-    const validationRequest = Validation.Validation.readValidationRequest();
+    const validationRequest = Validation.Validation.readValidationRequest() as ValidationRequest;
     const settings: PolicySettings = validationRequest.settings || {};
-    const podName = getPodName(validationRequest);
+    const resource = getKubernetesResource(validationRequest);
 
-    if (!podName) {
-      writeOutput(Validation.Validation.rejectRequest('Missing pod name in the request.'));
+    if (!resource) {
+      writeOutput(Validation.Validation.rejectRequest('Failed to parse Kubernetes resource.'));
       return;
     }
 
-    const deniedNames = settings.denied_names || [];
+    // Only validate Pod resources
+    if (resource.kind !== 'Pod') {
+      writeOutput(Validation.Validation.acceptRequest());
+      return;
+    }
 
-    if (deniedNames.includes(podName)) {
+    const hostname = getPodHostname(resource);
+    const deniedHostnames = settings.denied_hostnames || [];
+
+    // If no hostname is set, accept the request
+    if (!hostname) {
+      writeOutput(Validation.Validation.acceptRequest());
+      return;
+    }
+
+    if (deniedHostnames.includes(hostname)) {
       writeOutput(
-        Validation.Validation.rejectRequest(`The '${podName}' name is on the deny list.`),
+        Validation.Validation.rejectRequest(
+          `Pod hostname '${hostname}' is not allowed. Denied hostnames: [${deniedHostnames.join(', ')}]`
+        ),
       );
     } else {
       writeOutput(Validation.Validation.acceptRequest());
