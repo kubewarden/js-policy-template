@@ -11,10 +11,11 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "kubewarden-policy-sdk": "file:../policy-sdk-js/js/kubewarden-policy-sdk-0.1.0-alpha.0.tgz"
+    "kubewarden-policy-sdk": "file:../policy-sdk-js/js/kubewarden-policy-sdk-0.1.0-alpha.tgz"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
+    "@types/node": "^24.2.0",
     "jest": "^30.0.5",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.1",

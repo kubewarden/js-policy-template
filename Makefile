@@ -1,7 +1,7 @@
 .PHONY: all build-policy build-plugin test e2e clean fmt
 
-KUBEWARDEN_PLUGIN := javy-plugin-kubewarden.wasm
-
+# Get the plugin path from the SDK
+KUBEWARDEN_PLUGIN := $(shell node --input-type=module -e "import sdk from 'kubewarden-policy-sdk'; console.log(sdk.pluginPath)")
 all: build-policy annotated-policy.wasm
 
 install: dist/bundled.js
@@ -28,4 +28,4 @@ fmt:
 clean:
 	npm cache clean --force
 	rm -f policy.wasm annotated-policy.wasm
-	rm -rf dist dist-ts node_modules
+	rm -rf dist dist-ts node_modules package-lock.json
