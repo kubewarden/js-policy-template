@@ -1,5 +1,7 @@
-import { Validation, writeOutput } from 'kubewarden-policy-sdk';
-import { PolicySettings, KubernetesResource, PodSpec, ValidationRequest } from './types';
+import { Validation, writeOutput, } from 'kubewarden-policy-sdk';
+import { PolicySettings, KubernetesResource, PodSpec, } from './types';
+
+type ValidationRequest = Validation.Validation.ValidationRequest;
 
 declare function policyAction(): string;
 
@@ -11,10 +13,12 @@ declare function policyAction(): string;
  */
 function getKubernetesResource(validationRequest: ValidationRequest): KubernetesResource | undefined {
   try {
-    let requestObject = validationRequest.request?.object;
+    let requestObject: string | KubernetesResource | undefined = validationRequest.request?.object;
 
     if (typeof requestObject === 'string') {
-      requestObject = JSON.parse(requestObject) as KubernetesResource;
+      requestObject = JSON.parse(requestObject) as unknown as KubernetesResource;
+    } else if (requestObject === undefined) {
+      return undefined;
     }
 
     return requestObject as KubernetesResource;
@@ -46,7 +50,7 @@ function getPodHostname(resource: KubernetesResource): string | undefined {
  */
 function validate(): void {
   try {
-    const validationRequest = Validation.Validation.readValidationRequest() as ValidationRequest;
+    const validationRequest = Validation.Validation.readValidationRequest();
     const settings: PolicySettings = validationRequest.settings || {};
     const resource = getKubernetesResource(validationRequest);
 

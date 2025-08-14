@@ -43,15 +43,15 @@ export interface KubernetesResource {
 /**
  * Validation request interface
  */
-export interface ValidationRequest {
-  request: {
-    kind: {
-      group: string;
-      version: string;
-      kind: string;
-    };
-    object: KubernetesResource | string;
-    oldObject?: KubernetesResource | string;
-  };
-  settings: PolicySettings;
-}
+// export interface ValidationRequest {
+//   request: {
+//     kind: {
+//       group: string;
+//       version: string;
+//       kind: string;
+//     };
+//     object: KubernetesResource | string;
+//     oldObject?: KubernetesResource | string;
+//   };
+//   settings: PolicySettings;
+// }
