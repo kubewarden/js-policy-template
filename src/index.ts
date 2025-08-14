@@ -42,7 +42,7 @@ function getPodHostname(resource: KubernetesResource): string | undefined {
   }
 
   const podSpec = resource.spec as PodSpec;
-  return podSpec?.hostname;
+  return podSpec.hostname;
 }
 
 /**
@@ -57,12 +57,6 @@ function validate(): void {
 
     if (!resource) {
       writeOutput(Validation.Validation.rejectRequest('Failed to parse Kubernetes resource.'));
-      return;
-    }
-
-    // Only validate Pod resources
-    if (resource.kind !== 'Pod') {
-      writeOutput(Validation.Validation.acceptRequest());
       return;
     }
 
