@@ -10,9 +10,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "dependencies": {
-    "kubewarden-policy-sdk": "file:../policy-sdk-js/js/kubewarden-policy-sdk-0.1.0-alpha.tgz"
-  },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.2.0",
@@ -39,5 +36,8 @@
   },
   "bugs": {
     "url": "https://github.com/kubewarden/js-policy-template/issues"
+  },
+  "dependencies": {
+    "kubewarden-policy-sdk": "^0.1.0-alpha.1"
   }
 }
