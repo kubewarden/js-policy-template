@@ -52,7 +52,7 @@ node_modules/kubewarden-policy-sdk/plugin
 ```
 ## Testing
 
-It is important to test the finy result of the Javy compilation:
+It is important to test the final result of the Javy compilation:
 the actual WebAssembly module.
 
 This is done with a set of end-to-end tests.
