@@ -29,7 +29,7 @@ make all
 
 ## Code organization
 `src/types.ts` - defines the TypeScript interfaces for policySettigns and Kubernetes resources
-  - This policy makes use of [Kubernetes TypeScript types](https://github.com/silverlyra/kubernetes-types), which provides Kuberentes resource definitions for TypeScript. It may be useful when building other JavaScript/TypeScript policies.
+  - This policy makes use of [Kubernetes TypeScript types](https://github.com/silverlyra/kubernetes-types), which provides Kubernetes resource definitions for TypeScript. It may be useful when building other JavaScript/TypeScript policies.
 
 `src/index.ts` - contains the full policy implementation:
 - Parsing the incoming validation request
