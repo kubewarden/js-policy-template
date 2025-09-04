@@ -70,12 +70,8 @@ make e2e
 
 ## Required Development Tools
 - [TypeScript](https://www.typescriptlang.org)
-- [Webpack](https://webpack.js.org)
-- [Prettier](https://prettier.io)
 - [Node.js](https://nodejs.org)
 - Make 
 - [bats (Bash Automated Testing System)](https://github.com/bats-core/bats-core)
 - [kwctl](https://github.com/kubewarden/kwctl/releases)
 - [javy](https://github.com/bytecodealliance/javy)
-- [kubewarden-policy-sdk](https://github.com/kubewarden/policy-sdk-js)
-- [kubernetes-types](https://github.com/silverlyra/kubernetes-types)
