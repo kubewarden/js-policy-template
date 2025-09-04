@@ -67,3 +67,11 @@ The end-to-end tests are defined in the `e2e.bats` file and can be run using:
 ```console
 make e2e
 ```
+
+## Required Development Tools
+- [TypeScript](https://www.typescriptlang.org)
+- [Node.js](https://nodejs.org)
+- Make 
+- [bats (Bash Automated Testing System)](https://github.com/bats-core/bats-core)
+- [kwctl](https://github.com/kubewarden/kwctl/releases)
+- [javy](https://github.com/bytecodealliance/javy)
