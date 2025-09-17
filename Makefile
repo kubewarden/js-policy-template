@@ -9,7 +9,8 @@ install: dist/bundled.js
 
 dist/bundled.js: src/index.ts package.json webpack.config.cjs
 	@mkdir -p dist
-	npx webpack --config webpack.config.cjs
+	npm install
+	npm run build
 
 policy.wasm: dist/bundled.js $(KUBEWARDEN_PLUGIN)
 	javy build dist/bundled.js -C plugin=$(KUBEWARDEN_PLUGIN) -o policy.wasm
