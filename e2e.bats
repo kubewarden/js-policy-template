@@ -14,7 +14,7 @@
 
 @test "accept because hostname is not on the deny list" {
   run kwctl run annotated-policy.wasm -r test_data/pod_with_hostname.json --settings-json '{"denied_hostnames": ["forbidden-host"]}'
-  
+
   # this prints the output when one the checks below fails
   echo "output = ${output}"
 
@@ -25,7 +25,7 @@
 
 @test "accept because the deny list is empty" {
   run kwctl run annotated-policy.wasm -r test_data/pod_with_hostname.json
-  
+
   # this prints the output when one the checks below fails
   echo "output = ${output}"
 
@@ -36,7 +36,7 @@
 
 @test "accept because pod has no hostname set" {
   run kwctl run annotated-policy.wasm -r test_data/pod.json --settings-json '{"denied_hostnames": ["forbidden-host"]}'
-  
+
   # this prints the output when one the checks below fails
   echo "output = ${output}"
 
@@ -46,8 +46,8 @@
 }
 
 @test "accept non-pod resources" {
-  run kwctl run annotated-policy.wasm -r test_data/pod.json --settings-json '{"denied_hostnames": ["forbidden-host"]}'
-  
+  run kwctl run annotated-policy.wasm -r test_data/service.json --settings-json '{"denied_hostnames": ["forbidden-host"]}'
+
   # this prints the output when one the checks below fails
   echo "output = ${output}"
 
