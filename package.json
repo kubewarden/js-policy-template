@@ -37,6 +37,6 @@
     "url": "https://github.com/kubewarden/js-policy-template/issues"
   },
   "dependencies": {
-    "kubewarden-policy-sdk": "^0.1.2"
+    "@kubewarden/policy-sdk": "^0.2.1"
   }
 }
