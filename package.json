@@ -1,6 +1,6 @@
 {
   "name": "kubewarden-js-policy-template",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A JavaScript Kubewarden policy template",
   "main": "src/index.js",
   "scripts": {
@@ -37,6 +37,6 @@
     "url": "https://github.com/kubewarden/js-policy-template/issues"
   },
   "dependencies": {
-    "kubewarden-policy-sdk": "^0.1.2"
+    "@kubewarden/policy-sdk": "^0.2.1"
   }
 }

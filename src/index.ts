@@ -1,4 +1,4 @@
-import { Validation, writeOutput, } from 'kubewarden-policy-sdk';
+import { Validation, writeOutput, } from '@kubewarden/policy-sdk';
 import { PolicySettings, KubernetesResource, } from './types';
 import type { PodSpec } from 'kubernetes-types/core/v1';
 

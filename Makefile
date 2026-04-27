@@ -1,7 +1,7 @@
 .PHONY: all build-policy build-plugin test e2e clean fmt
 
 # Get the plugin from the SDK
-KUBEWARDEN_PLUGIN := node_modules/kubewarden-policy-sdk/plugin/javy-plugin-kubewarden.wasm
+KUBEWARDEN_PLUGIN := node_modules/@kubewarden/policy-sdk/plugin/javy-plugin-kubewarden.wasm
 all: build-policy annotated-policy.wasm
 
 install: dist/bundled.js
