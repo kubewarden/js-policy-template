@@ -17,21 +17,23 @@ The deny list is configurable by the user via the runtime settings of the policy
 You express the configuration of the policy using this structure:
 
 ```yaml
-{
-  "denied_hostnames": [ "bad-host", "forbidden-host" ]
-}
+{ 'denied_hostnames': ['bad-host', 'forbidden-host'] }
 ```
 
 To build the policy into a WebAssembly module, run:
+
 ```yaml
 make all
 ```
 
 ## Code organization
+
 `src/types.ts` - defines the TypeScript interfaces for policySettigns and Kubernetes resources
-  - This policy makes use of [Kubernetes TypeScript types](https://github.com/silverlyra/kubernetes-types), which provides Kubernetes resource definitions for TypeScript. It may be useful when building other JavaScript/TypeScript policies.
+
+- This policy makes use of [Kubernetes TypeScript types](https://github.com/silverlyra/kubernetes-types), which provides Kubernetes resource definitions for TypeScript. It may be useful when building other JavaScript/TypeScript policies.
 
 `src/index.ts` - contains the full policy implementation:
+
 - Parsing the incoming validation request
 - Extracting the Kubernetes resource and Pod hostname
 - Enforcing the deny list logic
@@ -50,6 +52,7 @@ Policies are compiled to WebAssembly using Kubewarden's [`javy`](https://github.
 ```yaml
 node_modules/kubewarden-policy-sdk/plugin
 ```
+
 ## Testing
 
 It is important to test the final result of the Javy compilation:
@@ -69,9 +72,10 @@ make e2e
 ```
 
 ## Required Development Tools
+
 - [TypeScript](https://www.typescriptlang.org)
 - [Node.js](https://nodejs.org)
-- Make 
+- Make
 - [bats (Bash Automated Testing System)](https://github.com/bats-core/bats-core)
 - [kwctl](https://github.com/kubewarden/kwctl/releases)
 - [javy](https://github.com/bytecodealliance/javy)

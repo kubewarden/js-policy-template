@@ -1,5 +1,5 @@
-import { Validation, writeOutput, } from '@kubewarden/policy-sdk';
-import { PolicySettings, KubernetesResource, } from './types';
+import { Validation, writeOutput } from '@kubewarden/policy-sdk';
+import { PolicySettings, KubernetesResource } from './types';
 import type { PodSpec } from 'kubernetes-types/core/v1';
 
 type ValidationRequest = Validation.Validation.ValidationRequest;
@@ -12,7 +12,9 @@ declare function policyAction(): string;
  * @param {ValidationRequest} validationRequest - The validation request object.
  * @returns {KubernetesResource | undefined} The parsed Kubernetes resource if available.
  */
-function getKubernetesResource(validationRequest: ValidationRequest): KubernetesResource | undefined {
+function getKubernetesResource(
+  validationRequest: ValidationRequest,
+): KubernetesResource | undefined {
   try {
     let requestObject: string | KubernetesResource | undefined = validationRequest.request?.object;
 
@@ -72,7 +74,7 @@ function validate(): void {
     if (deniedHostnames.includes(hostname)) {
       writeOutput(
         Validation.Validation.rejectRequest(
-          `Pod hostname '${hostname}' is not allowed. Denied hostnames: [${deniedHostnames.join(', ')}]`
+          `Pod hostname '${hostname}' is not allowed. Denied hostnames: [${deniedHostnames.join(', ')}]`,
         ),
       );
     } else {

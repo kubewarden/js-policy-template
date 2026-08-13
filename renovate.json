@@ -1,8 +1,4 @@
 {
-  "extends": [
-    "config:recommended",
-    "group:allNonMajor",
-    "schedule:earlyMondays"
-  ],
+  "extends": ["config:recommended", "group:allNonMajor", "schedule:earlyMondays"],
   "labels": ["dependencies"]
 }
