@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.2.0",
+    "@types/node": "^26.0.0",
     "jest": "^30.0.5",
     "kubernetes-types": "^1.30.0",
     "prettier": "^3.6.2",
